@@ -37,19 +37,25 @@ sudo apt update && sudo apt install signal-desktop
 
 ## Tor
 wget 'https://dist.torproject.org/torbrowser/8.0.6/tor-browser-linux64-8.0.6_en-US.tar.xz'
-tar xvzf tor-browser-linux64-8.0.6_en-US.tar.xz
+tar xvf tor-browser-linux64-8.0.6_en-US.tar.xz
+mv tor-browser_en-US ~/
+
 
 
 ## Vocaloid downloader
 cd ~/Documents
-git clone https://github.com/insanity54/vocaloid-dl
+if [ ! -d "vocaloid-dl" ]; then
+  git clone https://github.com/insanity54/vocaloid-dl
+fi
 cd vocaloid-dl
 ./install.sh
 
 
 ## aria2c daemon
 cd ~/Documents
-git clone https://github.com/insanity54/aria2c-daemon
+if [ ! -d "aria2c-daemon" ]; then
+  git clone https://github.com/insanity54/aria2c-daemon
+fi
 cd aria2c-daemon
 sed -i -e "/rpc-secret=/ s/=.*/=${aria2pw}/" ./aria2.conf
 ./install.sh
