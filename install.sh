@@ -4,9 +4,11 @@
 echo 'Please enter desired aria2c password:'
 read aria2pw
 
+echo 'Please enter desired zerotier network:'
+read ztnet
 
 sudo apt-get update
-sudo apt-get install mg firefox vlc mpv aria2
+sudo apt-get install mg firefox vlc mpv aria2 wget curl git
 
 
 
@@ -59,3 +61,9 @@ fi
 cd aria2c-daemon
 sed -i -e "/rpc-secret=/ s/=.*/=${aria2pw}/" ./aria2.conf
 ./install.sh
+
+
+
+## Zerotier
+curl -s 'https://raw.githubusercontent.com/zerotier/download.zerotier.com/master/htdocs/contact%40zerotier.com.gpg' | gpg --import && if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
+zerotier-cli join $ztnet
